@@ -1,0 +1,28 @@
+yaml
+
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build
+        run: dotnet publish PixelWorldsProxy/PixelWorldsProxy.csproj -c Release -r win-x64 --self-contained true -o ./output
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PixelWorldsProxy
+          path: ./output/
