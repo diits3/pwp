@@ -1,6 +1,4 @@
-yaml
-
-name: Build
+yamlname: Build
 
 on:
   workflow_dispatch:
